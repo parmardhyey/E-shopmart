@@ -1,0 +1,224 @@
+ <!--header-->
+    <div class="header">
+        <div class="container">
+            <div class="main-header">
+                <div class="carting">
+
+                    <?php
+								if(isset($_SESSION['u_name'])){	
+									$u_name = $_SESSION['u_name'];
+									$qimpo = $conn->query("SELECT * FROM `i_new_user_details` WHERE u_name = '$u_name'") or die(mysqli_error($conn));
+									while($fimpo = $qimpo->fetch_array()){	
+
+									$u_name = $fimpo['u_name'];
+									
+								?>
+                    <div class="dropdown">
+                        <button class="dropbtn"><?php 
+		
+									echo "Hi, ".$fimpo['u_name']; 
+									?>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="profile.php">PROFILE</a>
+                            <a href="order.php">ORDERS</a>
+                            <a href="cart.php">CART</a>
+                            <a href="feedback.php">FEEDBACK</a>
+                            <a href="logout.php">LOGOUT</a>
+                        </div>
+                    </div>
+
+
+                    <?php } } else {
+										?>
+
+
+
+                    <button class="dropbtn"><a href="login.php">LOGIN</a></button>
+                    <?php			} 
+					 ?>
+
+
+
+
+                </div>
+
+                <div class="logo">
+                    <h1 style="color:black;"><b><i>E-Shop Mart</i></b></h1>
+                </div>
+                <div class="box_1">
+                    <?php
+								if(isset($_SESSION['u_name'])){	
+									$u_name = $_SESSION['u_name'];
+							$sql = $conn->query("SELECT * FROM cart_t WHERE cart_t.cus_name='$u_name'
+												")
+													or die(mysqli_error($conn)) ;
+											while($fimpo = $sql->fetch_array()){
+						?>
+                    <a href="cart.php">
+                        <h3>Cart: <span> Rs.<?php echo $fimpo['totalprice']; ?>.00</span><img src="images/cart.png" alt="" /></h3>
+                    </a>
+                    <?php
+											}	} else {
+									?>
+                    <a href="cart.php">
+                        <h3>Cart Empty<img src="images/cart.png" alt="" /></h3>
+                    </a>
+                    <?php		
+								} ?>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <!-- start header menu -->
+            <ul class="megamenu skyblue">
+                <li><a href="index.php">HOME</a></li>
+                <li><a href="women.php">WOMEN</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Shop</h4>
+                                    <ul>
+
+                                        <li><a href="women.php">Women</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Clothing</h4>
+
+                                    <?php
+	
+
+					for($b=0;$b<9;$b++){
+					$qimpo = $conn->query("SELECT * FROM   cat_list 
+											WHERE m_cat_as = 2 AND cat_list.id= '$b'   ")
+											or die(mysqli_error($conn)) ;
+									while($fimp1 = $qimpo->fetch_array()){
+									$cat = $fimp1['id'];
+									$name = $fimp1['name'];									
+									?>
+                                    <ul>
+                                        <li><a href="women.php?data=<?php echo $cat; ?>"><?php echo $name; ?></a></li> <?php
+									}				
+					}
+					?>
+
+
+
+
+</ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Footware</h4>
+                                    <ul>
+                                        <li><a href="">COMING SOON</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Accessories</h4>
+                                    <ul>
+                                        <li><a href="">COMING SOON</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Beauty</h4>
+                                    <ul>
+                                        <li><a href="">COMING SOON</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col2"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="men.php">MEN</a>
+                    <div class="megapanel">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Shop</h4>
+                                    <ul>
+
+                                        <li><a href="men.php">Men</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Clothing</h4>
+                                    <?php
+	
+
+					for($b=0;$b<9;$b++){
+					$qimpo = $conn->query("SELECT * FROM   cat_list 
+											WHERE m_cat_as = 1 AND cat_list.id= '$b'   ")
+											or die(mysqli_error($conn)) ;
+									while($fimp1 = $qimpo->fetch_array()){
+									$cat = $fimp1['id'];
+									$name = $fimp1['name'];									
+									?>
+                                    <ul>
+                                        <li><a href="men.php?data=<?php echo $cat; ?>"><?php echo $name; ?></a></li> <?php
+									}				
+					}
+					?>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Footware</h4>
+                                    <ul>
+                                        <li><a href="">COMING SOON</a></li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <h4>Accessories</h4>
+                                    <ul>
+                                        <li><a href="">COMING SOON</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                                  
+                             
+                        <div class="row">
+                            <div class="col2"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                            <div class="col1"></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="grid"><a href="about.php">ABOUT US</a></li>
+
+
+
+            </ul>
